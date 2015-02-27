@@ -100,5 +100,20 @@ describe "ToDo" do
       #Teardown
       rdel = HTTParty.delete url + "#{rpost["id"]}"
     end
+    it "should not allow POST on an existing item" do
+      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rpost2 = HTTParty.post url + "#{rpost["id"]}", query:{title: 'newerthing', due: '2015-01-25'}
+      #Expectations
+      expect(rpost2.code).to eq(405)
+      expect(rpost2.message).to eq("Method Not Allowed")
+      #Teardown
+      rdel = HTTParty.delete url + "#{rpost["id"]}"
+    end
+    it "should not allow POST ontop of an non-existing item" do
+      rpost = HTTParty.post url + "1", query:{title: 'newerthing', due: '2015-01-25'}
+      #Expectations
+      expect(rpost.code).to eq(405)
+      expect(rpost.message).to eq("Method Not Allowed")
+    end
   end
 end 
