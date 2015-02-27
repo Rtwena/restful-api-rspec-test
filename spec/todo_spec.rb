@@ -4,6 +4,7 @@ require 'yaml'
 
 describe "ToDo" do
   let(:url) {url = "http://lacedeamon.spartaglobal.com/todos/"}
+  let(:new_item) {HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}}
   describe "get response from todos collection" do
     it "should GET 200 'OK'" do
       rget = HTTParty.get url
@@ -14,7 +15,7 @@ describe "ToDo" do
   end
   describe "create/delete item" do
     it "should POST data into collection" do
-      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rpost = new_item
       #Expectations
       expect(rpost.code).to eq(201)
       expect(rpost.message).to eq("Created")
@@ -22,7 +23,7 @@ describe "ToDo" do
       rdel = HTTParty.delete url + "#{rpost["id"]}"
     end
     it "should DELETE item" do
-      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rpost = new_item
       rdelete = HTTParty.delete url + "#{rpost["id"]}"
       #Expectations
       expect(rdelete.code).to eq(204)
@@ -46,7 +47,7 @@ describe "ToDo" do
       end
     end
     it "should allow changing of an existing item using PUT" do
-      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rpost = new_item
       rput = HTTParty.put url + "#{rpost["id"]}", query:{title: 'newerthing', due: '2014-01-25'}
       #Expectations
       expect(rput.code).to eq(200)
@@ -56,7 +57,7 @@ describe "ToDo" do
       rdel = HTTParty.delete url + "#{rpost["id"]}"
     end
     it "should allow changing of an existing item using PATCH" do
-      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rpost = new_item
       rpatch = HTTParty.patch url + "#{rpost["id"]}", query:{title: 'newerthing'}
       #Expectations
       expect(rpatch.code).to eq(200)
@@ -92,7 +93,7 @@ describe "ToDo" do
       expect(rpost.message).to eq("Unprocessable Entity")
     end
     it "should not allow missing date parameter during PUT" do
-      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rpost = new_item
       rput = HTTParty.put url + "#{rpost["id"]}", query:{title: 'newerthing'}
       #Expectations
       expect(rput.code).to eq(422)
@@ -101,7 +102,7 @@ describe "ToDo" do
       rdel = HTTParty.delete url + "#{rpost["id"]}"
     end
     it "should not allow POST on an existing item" do
-      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rpost = new_item
       rpost2 = HTTParty.post url + "#{rpost["id"]}", query:{title: 'newerthing', due: '2015-01-25'}
       #Expectations
       expect(rpost2.code).to eq(405)
@@ -110,7 +111,7 @@ describe "ToDo" do
       rdel = HTTParty.delete url + "#{rpost["id"]}"
     end
     it "should not allow POST ontop of a non-existing item" do
-      rpost = HTTParty.post url + "1", query:{title: 'newerthing', due: '2015-01-25'}
+      rpost = HTTParty.post url + "1"
       #Expectations
       expect(rpost.code).to eq(405)
       expect(rpost.message).to eq("Method Not Allowed")
