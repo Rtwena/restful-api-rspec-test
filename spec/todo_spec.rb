@@ -53,5 +53,11 @@ describe "ToDo" do
       expect(rdelete.code).to eq(405)
       expect(rdelete.message).to eq("Method Not Allowed")
     end
+    it "should not allow POST in the wrong format" do
+      rpost = HTTParty.post url, query:{title: "check", due: "incorrect format"}
+      #Expectations
+      expect(rpost.code).to eq(500)
+      expect(rpost.message).to eq("Internal Server Error")
+    end
   end
 end 
