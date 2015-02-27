@@ -1,0 +1,43 @@
+require 'httparty'
+
+response = HTTParty.get "http://lacedeamon.spartaglobal.com/todos"
+
+response.body #body of request #this case json (google would give http)
+
+response.code #status code
+
+reponse.message #message with status code
+
+reponse.headers #
+
+response[0] #returns a hash keys are strings
+
+response[0]["id"]
+
+response = HTTParty.get "http://lacedeamon.spartaglobal.com/todos/285"
+
+response = HTTParty.patch "http://lacedeamon.spartaglobal.com/todos/285", query: {title: 'A thing'}
+
+response = HTTParty.post "http://lacedeamon.spartaglobal.com/todos/", query: {title: 'new thing!', due: '2038-01-30'}
+
+response = HTTParty.delete "http://lacedeamon.spartaglobal.com/todos/285"
+
+
+
+EXERCISE
+
+work as a group to design
+
+as indivduals write an rspec test suite
+consider maintainability can we use YAML? Readme, Gemfile Rakefile (rake.clean, rake.setup)
+
+
+test cases
+test framework
+setup teardown
+
+exercise#2
+
+Convert watir tumblr test to rspec
+reseach watir-rspec gem, is it useful?
+experiment with the availble Rspec expectations - you'll use this with cucumber later in the course(should(old) vs expect(new))
