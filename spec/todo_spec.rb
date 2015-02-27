@@ -71,5 +71,14 @@ describe "ToDo" do
       expect(rpost.code).to eq(422)
       expect(rpost.message).to eq("Unprocessable Entity")
     end
+    it "should not allow missing date parameter during PUT" do
+      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rput = HTTParty.put url + "#{rpost["id"]}", query:{title: 'newerthing'}
+      #Expectations
+      expect(rput.code).to eq(422)
+      expect(rput.message).to eq("Unprocessable Entity")
+      #Teardown
+      rdel = HTTParty.delete url + "#{rpost["id"]}"
+    end
   end
 end 
