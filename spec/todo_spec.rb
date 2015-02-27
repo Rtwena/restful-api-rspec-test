@@ -27,6 +27,8 @@ describe "ToDo" do
       #Expectations
       expect(rdelete.code).to eq(204)
       expect(rdelete.message).to eq("No Content")
+      expect((HTTParty.get url + "#{rpost["id"]}").code).to eq(404)
+      expect((HTTParty.get url + "#{rpost["id"]}").message).to eq("Not Found")
     end
     it "should allow multiple data input from a yaml file" do
       data = YAML.load(File.open('data/todo.yml'))
