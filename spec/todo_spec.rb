@@ -65,5 +65,11 @@ describe "ToDo" do
       expect(rdelete.code).to eq(404)
       expect(rdelete.message).to eq("Not Found")
     end
+    it "should not allow missing date parameter during POST" do
+      rpost = HTTParty.post url, query:{title: "title"}
+      #Expectations
+      expect(rpost.code).to eq(422)
+      expect(rpost.message).to eq("Unprocessable Entity")
+    end
   end
 end 
