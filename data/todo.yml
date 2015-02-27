@@ -1,11 +1,11 @@
 items:
-  - title: Cheese
-    due: 2015-15-30
-  - title: Egg
+  - title: Cheese-rich
+    due: 2015-12-30
+  - title: Egg-rich
     due: 2011-01-15
-  - title: Bacon
+  - title: Bacon-rich
     due: 2015-02-25
-  - title: More Bacon
+  - title: More Bacon-rich
     due: 2015-02-27
-  - title: Milk
-      due: 2016-05-19
+  - title: Milk-rich
+    due: 2016-05-19
