@@ -46,6 +46,14 @@ describe "ToDo" do
       end
     end
   end
+  describe "Nagative tests" do
+    it "should not allow deleteing a collection" do
+      rdelete = HTTParty.delete url
+      #Expectations
+      expect(rdelete.code).to eq(405)
+      expect(rdelete.message).to eq("Method Not Allowed")
+    end
+  end
 end 
 
 
