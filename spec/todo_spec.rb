@@ -45,6 +45,16 @@ describe "ToDo" do
         HTTParty.delete url + "#{response["id"]}"
       end
     end
+    it "should allow changing of an existing item using PUT" do
+      rpost = HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}
+      rput = HTTParty.put url + "#{rpost["id"]}", query:{title: 'newerthing', due: '2014-01-25'}
+      #Expectations
+      expect(rput.code).to eq(200)
+      expect(rput.message).to eq("OK")
+      expect((HTTParty.get url + "#{rpost["id"]}")["title"]).to eq("newerthing")
+      #Teardown
+      rdel = HTTParty.delete url + "#{rpost["id"]}"
+    end
   end
   describe "Nagative tests" do
     it "should not allow deleteing a collection" do
