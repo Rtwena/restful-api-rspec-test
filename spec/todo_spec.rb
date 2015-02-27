@@ -55,6 +55,3 @@ describe "ToDo" do
     end
   end
 end 
-
-
-#r = HTTParty.get "http://lacedeamon.spartaglobal.com/todos#{response[0]["id"]}"
