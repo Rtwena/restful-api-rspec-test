@@ -59,5 +59,11 @@ describe "ToDo" do
       expect(rpost.code).to eq(500)
       expect(rpost.message).to eq("Internal Server Error")
     end
+    it "should give back an error when deleteing an item that doesn't exist" do
+      rdelete = HTTParty.delete url + "1"
+      #Expectations
+      expect(rdelete.code).to eq(404)
+      expect(rdelete.message).to eq("Not Found")
+    end
   end
 end 
