@@ -109,7 +109,7 @@ describe "ToDo" do
       #Teardown
       rdel = HTTParty.delete url + "#{rpost["id"]}"
     end
-    it "should not allow POST ontop of an non-existing item" do
+    it "should not allow POST ontop of a non-existing item" do
       rpost = HTTParty.post url + "1", query:{title: 'newerthing', due: '2015-01-25'}
       #Expectations
       expect(rpost.code).to eq(405)
