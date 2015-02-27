@@ -1,0 +1,11 @@
+items:
+  - title: Cheese
+    due: 2015-15-30
+  - title: Egg
+    due: 2011-01-15
+  - title: Bacon
+    due: 2015-02-25
+  - title: More Bacon
+    due: 2015-02-27
+  - title: Milk
+      due: 2016-05-19
