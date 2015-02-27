@@ -115,5 +115,11 @@ describe "ToDo" do
       expect(rpost.code).to eq(405)
       expect(rpost.message).to eq("Method Not Allowed")
     end
+    it "should not GET an item that doesnt exist" do
+      rget = HTTParty.get url + "1"
+      #Expectations
+      expect(rget.code).to eq(404)
+      expect(rget.message).to eq("Not Found")
+    end
   end
 end 
