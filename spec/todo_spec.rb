@@ -3,7 +3,7 @@ require 'httparty'
 require 'yaml'
 
 describe "ToDo" do
-  let(:url) {url = "http://lacedeamon.spartaglobal.com/todos/"}
+  let(:url) {"http://lacedeamon.spartaglobal.com/todos/"}
   let(:new_item) {HTTParty.post url, query:{title: 'newthing!', due: '2015-01-25'}}
   describe "get response from todos collection" do
     it "should GET 200 'OK'" do
