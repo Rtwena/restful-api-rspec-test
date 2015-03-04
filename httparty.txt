@@ -31,7 +31,6 @@ work as a group to design
 as indivduals write an rspec test suite
 consider maintainability can we use YAML? Readme, Gemfile Rakefile (rake.clean, rake.setup)
 
-
 test cases
 test framework
 setup teardown
@@ -41,3 +40,5 @@ exercise#2
 Convert watir tumblr test to rspec
 reseach watir-rspec gem, is it useful?
 experiment with the availble Rspec expectations - you'll use this with cucumber later in the course(should(old) vs expect(new))
+
+ongithub rspec expectations
